@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transparency & Records | Adarsh Charitable Trust</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #0a3d62; 
+            --accent: #f39c12;  
+            --light-bg: #f4f7f6;
+            --white: #ffffff;
+            --dark: #2c3e50;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            line-height: 1.6; 
+            color: var(--dark); 
+            background-color: var(--white); 
+        }
+
+        .container { width: 85%; max-width: 1200px; margin: auto; }
+
+        /* Navigation */
+        nav { 
+            background-color: #fff; 
+            padding: 20px 0; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1); 
+        }
+        nav .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 700; color: var(--primary); font-size: 1.5rem; letter-spacing: 1px; }
+        .nav-links { list-style: none; display: flex; }
+        .nav-links li { margin-left: 25px; }
+        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 500; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* Premium Transparency Section */
+        #transparency-page {
+            background: linear-gradient(180deg, #ffffff 0%, #f0f4f8 100%);
+            padding: 80px 0;
+            min-height: 80vh;
+        }
+
+        .transparency-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .transparency-header h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .header-line {
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            margin: 0 auto 20px;
+            border-radius: 2px;
+        }
+
+        /* Document Grid */
+        .doc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .doc-box {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(10, 61, 98, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .doc-box:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(10, 61, 98, 0.12);
+            border-color: var(--accent);
+        }
+
+        .icon-wrapper {
+            width: 80px;
+            height: 80px;
+            background: rgba(243, 156, 18, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            transition: 0.3s;
+        }
+
+        .doc-box:hover .icon-wrapper {
+            background: var(--accent);
+            transform: rotate(10deg);
+        }
+
+        .icon-wrapper i {
+            font-size: 32px;
+            color: var(--accent);
+        }
+
+        .doc-box:hover .icon-wrapper i {
+            color: #fff;
+        }
+
+        .doc-info h3 {
+            font-family: 'Merriweather', serif;
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .doc-info p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        /* Buttons */
+        .doc-btns {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-outline, .btn-fill {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: 0.3s;
+            cursor: pointer;
+            text-align: center;
+            border: none;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .btn-fill {
+            background: var(--accent);
+            color: #fff;
+            border: 2px solid var(--accent);
+        }
+
+        .btn-fill:hover {
+            background: #d35400;
+            border-color: #d35400;
+        }
+
+        /* Simple Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            height: 80vh;
+        }
+
+        .close {
+            color: #fff;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: -45px;
+        }
+
+        iframe { width: 100%; height: 100%; border: none; }
+
+        footer { background: var(--primary); color: white; padding: 40px 0; text-align: center; margin-top: 50px; }
+
+        @media (max-width: 768px) {
+            .transparency-header h1 { font-size: 2.2rem; }
+            .doc-btns { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container">
+            <div class="logo">ADARSH TRUST</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="transparency.html" style="color:var(--accent);">Transparency</a></li>
+                <li><a href="index.html#contact">Help Desk</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="transparency-page">
+        <div class="container">
+            <div class="transparency-header">
+                <h1>Trust Records</h1>
+                <div class="header-line"></div>
+                <p>Maintaining public trust through open documentation and verified legal credentials.</p>
+            </div>
+
+            <div class="doc-grid">
+                <!-- Trust Deed -->
+                <div class="doc-box">
+                    <div class="doc-info">
+                        <div class="icon-wrapper"><i class="fas fa-file-signature"></i></div>
+                        <h3>Trust Deed</h3>
+                        <p>Official registration of the trust under Karnataka State laws.<br><strong>Ref: 17/11-12</strong></p>
+                    </div>
+                    <div class="doc-btns">
+                        <button onclick="openModal('docs/trust-deed.pdf')" class="btn-outline">View Online</button>
+                        <a href="docs/trust-deed.pdf" download class="btn-fill"><i class="fas fa-download"></i> PDF</a>
+                    </div>
+                </div>
+
+                <!-- NGO Darpan -->
+                <div class="doc-box">
+                    <div class="doc-info">
+                        <div class="icon-wrapper"><i class="fas fa-university"></i></div>
+                        <h3>NGO Darpan</h3>
+                        <p>Unique ID issued by NITI Aayog for government collaboration.<br><strong>ID: KA/2026/00993871</strong></p>
+                    </div>
+                    <div class="doc-btns">
+                        <button onclick="openModal('docs/darpan-copy.pdf')" class="btn-outline">View Online</button>
+                        <a href="docs/darpan-copy.pdf" download class="btn-fill"><i class="fas fa-download"></i> PDF</a>
+                    </div>
+                </div>
+
+               
+    </section>
+
+    <!-- Document Viewer Modal -->
+    <div id="docModal" class="modal">
+        <div class="container">
+            <span class="close" onclick="closeModal()">&times; Close Window</span>
+            <div class="modal-content" id="modalBody">
+                <!-- PDF will load here -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Adarsh Charitable Trust. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function openModal(docPath) {
+            document.getElementById("docModal").style.display = "block";
+            document.getElementById("modalBody").innerHTML = `<iframe src="${docPath}"></iframe>`;
+        }
+
+        function closeModal() {
+            document.getElementById("docModal").style.display = "none";
+            document.getElementById("modalBody").innerHTML = "";
+        }
+
+        // Close modal if user clicks outside the content
+        window.onclick = function(event) {
+            let modal = document.getElementById("docModal");
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+
+</body>
+</html>

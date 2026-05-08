@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adarsh Charitable Trust | Hosapete</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #0a3d62; 
+            --accent: #f39c12;  
+            --light: #f9f9f9;
+            --dark: #2c3e50;
+            --white: #ffffff;
+            --neon-pink: #ff00ff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--dark); background: var(--white); }
+        h1, h2, h3 { font-family: 'Merriweather', serif; }
+        .container { width: 85%; max-width: 1200px; margin: auto; }
+        section { padding: 80px 0; border-bottom: 1px solid #eee; }
+
+        /* Header & Logos */
+        .site-header {
+            padding: 20px;
+            background-color: #050505;
+            background-image: 
+                radial-gradient(circle at 50% 20%, rgba(0, 255, 255, 0.2) 0%, transparent 60%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 255, 0.15) 0%, transparent 50%);
+            background-attachment: fixed;
+            color: white;
+        }
+        .logo-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header-logo {
+            height: 65px;
+            width: auto;
+            border-radius: 8px;
+            border: 1px solid #444;
+            object-fit: cover;
+            margin-bottom: 5px;
+        }
+        .logo-details { font-size: 0.8rem; font-weight: bold; }
+
+        /* Navigation */
+        nav { background-color: #fff; padding: 15px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        nav .container { display: flex; justify-content: space-between; align-items: center; position: relative; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+        .nav-links { list-style: none; display: flex; }
+        .nav-links li { margin-left: 20px; }
+        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 500; font-size: 0.9rem; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* --- New Mobile Menu CSS --- */
+        .menu-icon {
+            display: none; /* Hidden on desktop */
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .logo-container { flex-direction: column; gap: 20px; text-align: center; }
+            
+            .menu-icon {
+                display: block; /* Show icon on mobile */
+            }
+
+            .nav-links {
+                display: none; /* Hide links by default on mobile */
+                flex-direction: column;
+                position: absolute;
+                top: 50px;
+                left: 0;
+                width: 100%;
+                background: #fff;
+                box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+                padding: 20px;
+                z-index: 1000;
+            }
+
+            .nav-links.active {
+                display: flex; /* Show links when "active" class is added via JS */
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+                text-align: center;
+                margin-left: 0;
+            }
+        }
+
+        /* Hero Section */
+        #hero { 
+            background: linear-gradient(rgba(10, 61, 98, 0.85), rgba(10, 61, 98, 0.85)), 
+            url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1350&q=80') center/cover; 
+            color: white; text-align: center; padding: 100px 0; 
+        }
+        .hero-content h1 { font-size: 3rem; margin-bottom: 20px; }
+        .mission-vision { display: flex; gap: 30px; margin-top: 40px; justify-content: center; flex-wrap: wrap; }
+        .mv-box { background: rgba(255,255,255,0.1); padding: 30px; border-radius: 10px; flex: 1; min-width: 300px; max-width: 450px; border: 1px solid rgba(255,255,255,0.2); }
+
+        /* Work Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 40px;
+        }
+        .work-column {
+            background: #fdfdfd;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #eee;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 1;
+            transition: z-index 0.3s;
+        }
+        .work-column:hover { z-index: 100; }
+        .work-column h3 { font-size: 1rem; color: var(--primary); margin-bottom: 5px; }
+        .work-column p { font-size: 0.75rem; color: #666; margin-bottom: 10px; line-height: 1.3; }
+
+        .image-grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+        .grid-item { position: relative; height: 100px; }
+        .grid-item img { width: 100%; height: 100%; object-fit: cover; border-radius: 6px; cursor: zoom-in; transition: transform 0.4s ease; }
+
+        @media (hover: hover) {
+            .grid-item:hover { z-index: 999; }
+            .grid-item:hover img { transform: scale(3.5); box-shadow: 0 15px 30px rgba(0,0,0,0.5); }
+        }
+
+        @media (max-width: 1024px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .gallery-grid { grid-template-columns: repeat(1, 1fr); } }
+
+        /* Forms & Contact Section */
+        .contact-container { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; margin-top: 40px; }
+        @media (max-width: 768px) { .contact-container { grid-template-columns: 1fr; } }
+
+        .form-group { margin-bottom: 15px; }
+        input, textarea, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; margin-top: 5px; font-family: inherit; }
+        .btn { background: var(--accent); color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: 600; cursor: pointer; border: none; transition: 0.3s; width: 100%; }
+        .btn:hover { background: #d35400; }
+
+        footer { background: var(--primary); color: white; padding: 40px 0; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="logo-container">
+            <div class="logo-group">
+                <img src="Data/TrustLogo.jpg" alt="Trust Logo" class="header-logo">
+                <p class="logo-details" style="color: var(--neon-pink);">Reg No: 17/11-12</p>
+            </div>
+            <div style="text-align: center;">
+                <p style="font-style: italic; font-size: 0.9rem;">"Service to Humanity is Service to God"</p>
+            </div>
+            <div class="logo-group">
+                <img src="Data/NGODarpanLogo.jpg" alt="NGO Logo" class="header-logo">
+                <p class="logo-details" style="color: var(--neon-pink);">Darpan ID: KA/2026/00993871</p>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <div class="logo">ADARSH CHARITABLE TRUST</div>
+            <!-- Mobile Menu Icon -->
+            <div class="menu-icon" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="nav-list">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="work.html">Work</a></li>
+                <li><a href="transparency.html">Transparency</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="hero">
+        <div class="container">
+            <h1>Building a Just & Empowered Society</h1>
+            <p>Dedicated to social welfare, justice, and community health in Hosapete.</p>
+            <div class="mission-vision">
+                <div class="mv-box">
+                    <h3>Our Mission</h3>
+                    <p>To foster a resilient community by bridging the gap between social welfare and digital progress.</p>
+                </div>
+                <div class="mv-box">
+                    <h3>Our Vision</h3>
+                    <p>A future where every citizen is empowered with digital tools and legal knowledge.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="work">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <h2 style="font-size: 2.5rem; color: var(--primary);">Our Impact in Action</h2>
+                <div style="width: 60px; height: 4px; background: var(--accent); margin: 15px auto;"></div>
+                <p>Visual records of our completed projects and community initiatives.</p>
+            </div>
+
+            <div class="gallery-grid">
+                <!-- Work Column 1 -->
+                <div class="work-column">
+                    <h3>Women Home Meetings</h3>
+                    <p>Empowering women through community dialogue.</p>
+                    <div class="image-grid-4">
+                        <div class="grid-item"><img src="images1/work1.jpg" alt="work1"></div>
+                        <div class="grid-item"><img src="images1/work2.jpg" alt="work2"></div>
+                        <div class="grid-item"><img src="images1/work3.jpg" alt="work3"></div>
+                        <div class="grid-item"><img src="images1/work4.jpg" alt="work4"></div>
+                    </div>
+                </div>
+
+                <!-- Work Column 2 -->
+                <div class="work-column">
+                    <h3>Identity Card Distribution</h3>
+                    <p>Providing essential legal guidance and support.</p>
+                    <div class="image-grid-4">
+                        <div class="grid-item"><img src="images2/id1.jpg" alt="id1"></div>
+                        <div class="grid-item"><img src="images2/id2.jpg" alt="id2"></div>
+                        <div class="grid-item"><img src="images2/id3.jpg" alt="id3"></div>
+                        <div class="grid-item"><img src="images2/id4.jpg" alt="id4"></div>
+                    </div>
+                </div>
+
+                <!-- Work Column 3 -->
+                <div class="work-column">
+                    <h3>Digital Literacy</h3>
+                    <p>Bridging the digital divide for students.</p>
+                    <div class="image-grid-2">
+                        <div class="grid-item"><img src="1.jpg" alt="learn1"></div>
+                        <div class="grid-item"><img src="2.jpg" alt="learn2"></div>
+                    </div>
+                </div>
+
+                <!-- Work Column 4 -->
+                <div class="work-column">
+                    <h3>Health Initiatives</h3>
+                    <p>Promoting wellness in rural areas.</p>
+                    <div class="image-grid-4">
+                        <div class="grid-item"><img src="images4/Health1.jpg" alt="Health1"></div>
+                        <div class="grid-item"><img src="images4/Health2.jpg" alt="Health2"></div>
+                        <div class="grid-item"><img src="images4/Health3.jpg" alt="Health3"></div>
+                        <div class="grid-item"><img src="images4/Health4.jpg" alt="Health4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="contact-container">
+                <div>
+                    <h2>Help Desk / Grievance Form</h2>
+                    <form id="helpDeskForm">
+                        <div class="form-group"><input type="text" name="full_name" placeholder="Full Name" required></div>
+                        <div class="form-group"><input type="tel" name="phone_number" placeholder="Phone Number" required></div>
+                        <div class="form-group">
+                            <select name="category" required>
+                                <option value="">Select Issue Category</option>
+                                <option value="Children">Children  </option>
+				<option value="Education & Literacy">Education & Literacy  </option>
+                                <option value="Legal Awareness & Aid">Legal Awareness & Aid  </option>
+				<option value="Science & Technology">Science & Technology  </option>
+				<option value="Women's Development & Empowerment">Women's Development & Empowerment  </option>
+				<option value="Dalit Upliftment">Dalit Upliftment  </option>
+				<option value="Differently Abled">Differently Abled  </option>
+				<option value="Aged/ Elderly">Aged/ Elderly  </option>
+				<option value="Human Rights">Human Rights  </option>
+				<option value="Animal Welfare">Animal Welfare  </option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><textarea name="message" rows="4" placeholder="How can we help you?" required></textarea></div>
+                        <button type="submit" class="btn" id="submitBtn">Submit Request</button>
+                    </form>
+                </div>
+                <div style="background: var(--primary); color: white; padding: 30px; border-radius: 10px;">
+                    <h3>Office Address</h3>
+                    <p style="margin-top:15px;">Behind 100 Bed Hospital<br>29th Ward, 8th Main Cross</p>
+                    <p style="margin-top:15px;">M.J. Nagar, Hosapete-583 201,<br>Karnataka, INDIA</p>
+                    <p style="margin-top:10px;"><strong>Contact:</strong> +91 7892074422<br>Mail: Trust_adarsh@Rediffmail.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Adarsh Charitable Trust. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Mobile Menu Toggle Script ---
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navList = document.getElementById('nav-list');
+
+        mobileMenu.addEventListener('click', () => {
+            navList.classList.toggle('active');
+            const icon = mobileMenu.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navList.classList.remove('active');
+            });
+        });
+
+        // --- Form Submission Script ---
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyKj0X77qlU0xDXMAH0tbJ9MWbMIlLtMmZM0V3jDpQhNezloyeY0HM2Ga-6If_iKjy1oQ/exec';
+        const form = document.getElementById('helpDeskForm');
+        const btn = document.getElementById('submitBtn');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            btn.disabled = true;
+            btn.innerHTML = "Submitting...";
+            fetch(scriptURL, { method: 'POST', body: new FormData(form), mode: 'no-cors' })
+            .then(() => {
+                alert("Success! Your message has been sent.");
+                btn.disabled = false;
+                btn.innerHTML = "Submit Request";
+                form.reset();
+            })
+            .catch(() => {
+                alert("Submission failed.");
+                btn.disabled = false;
+                btn.innerHTML = "Submit Request";
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Adarsh Charitable Trust</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #0a3d62; 
+            --accent: #f39c12;  
+            --light-bg: #f4f7f6;
+            --white: #ffffff;
+            --dark: #2c3e50;
+            --gradient: linear-gradient(135deg, #0a3d62 0%, #1e3799 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            line-height: 1.6; 
+            color: var(--dark); 
+            background-color: var(--light-bg); 
+        }
+
+        .container { width: 85%; max-width: 1200px; margin: auto; }
+        
+        /* Header & Nav */
+        .site-header {
+            padding: 15px;
+            background-color: #050505;
+            color: white;
+            text-align: center;
+        }
+
+        nav { 
+            background-color: #fff; 
+            padding: 15px 0; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+        }
+        nav .container { display: flex; justify-content: space-between; align-items: center; }
+        .nav-links { list-style: none; display: flex; }
+        .nav-links li { margin-left: 20px; }
+        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 500; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* Hero Section */
+        .about-hero {
+            background: var(--gradient);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            clip-path: ellipse(150% 100% at 50% 0%);
+        }
+        .about-hero h1 { font-family: 'Merriweather', serif; font-size: 3rem; margin-bottom: 10px; }
+
+        /* Content Sections */
+        .section-padding { padding: 60px 0; }
+        
+        .about-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 50px; 
+            align-items: center; 
+        }
+
+        .about-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .highlight-text {
+            color: var(--primary);
+            font-weight: 600;
+            border-left: 4px solid var(--accent);
+            padding-left: 15px;
+            margin: 20px 0;
+        }
+
+        /* NEW: Volunteer Grid Styling */
+        .volunteer-section { padding: 80px 0; background: #eef2f3; }
+
+        .member-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .member-card {
+            background: #fff;
+            padding: 30px 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #eee;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 4px solid var(--primary);
+        }
+
+        .member-card:hover {
+            transform: translateY(-10px);
+            border-bottom-color: var(--accent);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .member-card h3 { color: var(--primary); font-size: 1.1rem; margin-bottom: 5px; }
+        .member-card p { color: var(--accent); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; }
+
+        /* NEW: Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 40px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            text-align: center;
+            animation: fadeIn 0.4s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .modal-content h2 { color: var(--primary); margin-bottom: 10px; }
+        .modal-content h4 { color: var(--accent); margin-bottom: 20px; text-transform: uppercase; }
+        .modal-content p { line-height: 1.6; color: #444; }
+
+        /* Stats & Footer */
+        .stats-section { background: var(--primary); color: white; text-align: center; padding: 60px 0; }
+        footer { background: var(--primary); color: white; padding: 40px 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); }
+
+        @media (max-width: 768px) {
+            .about-grid { grid-template-columns: 1fr; }
+            .about-hero h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <p style="font-style: italic; font-size: 0.9rem;">"Service to Humanity is Service to God"</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <div class="logo" style="font-weight:700; color:var(--primary);">ADARSH TRUST</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" style="color:var(--accent);">About</a></li>
+                <li><a href="transparency.html">Transparency</a></li>
+                <li><a href="index.html#contact">Help Desk</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="about-hero">
+        <div class="container">
+            <h1>Our Journey</h1>
+            <p>Empowering Hosapete through compassion and justice since 2011.</p>
+        </div>
+    </div>
+
+    <section class="section-padding">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-card">
+                    <h2 style="color:var(--primary); font-family: 'Merriweather';">Who We Are</h2>
+                    <p class="highlight-text">
+                        Adarsh Charitable Trust is a registered NGO dedicated to uplifting the marginalized sections of society in Karnataka.
+                    </p>
+                    <p>
+                        Founded by <strong>Zoya Ahmed</strong>, our organization focuses on providing a platform where legal aid, health awareness, and digital literacy come together. We believe that true charity isn't just a donation, but a pathway to self-reliance.
+                    </p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=600&q=80" 
+                         alt="Our Work" style="width: 100%; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.2);">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: Interactive Volunteer Section -->
+    <section class="volunteer-section" id="volunteers">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <h2 style="font-size: 2.5rem; color: #0a3d62; font-family: 'Merriweather';">Our Dedicated Team</h2>
+                <div style="width: 60px; height: 4px; background: #f39c12; margin: 15px auto;"></div>
+                <p>Meet the people driving change in our community. Click a member to see their details.</p>
+            </div>
+
+            <div class="member-grid" id="memberGrid">
+                <!-- Members will be injected here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="container">
+            <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px;">
+                <div>
+                    <h2 style="font-size: 2.5rem; color: var(--accent);">15+</h2>
+                    <p>Years of Service</p>
+                </div>
+                <div>
+                    <h2 style="font-size: 2.5rem; color: var(--accent);">5000+</h2>
+                    <p>People Empowered</p>
+                </div>
+                <div>
+                    <h2 style="font-size: 2.5rem; color: var(--accent);">100+</h2>
+                    <p>Legal Cases Aided</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for Member Details -->
+    <div id="memberModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Adarsh Charitable Trust. All Rights Reserved.</p>
+            <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.7;">M.J. Nagar, Hosapete, Karnataka</p>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Member Data
+        const members = [
+            { name: "Mrs. Zoya Ahmed", title: "President", bio: "Zoya Ahmed has good experience in the field of education, social work." },
+            { name: "Mr. Imtiyaz Ahmed", title: "Secretary", bio: "Imtiyaz Ahmed has a well experience in all the fields of technical and education field." },
+            { name: "Mr. Noor Mohammed", title: "Treasurer", bio: "Noor Mohammed is a experience hand in the finance field with good communication skill." },
+            { name: "V N Raghavendra", title: "CEO", bio: "Raghavendra is a very active and energetic personality with a MBA degree." },
+            { name: "Mrs. Gulzar Begum", title: "Vice President", bio: "Gulzar Begum has a face value in the society with good knowledge." },
+            { name: "Mr. Naushad Ahmed", title: "Joint Secretary", bio: "Naushad is a young and dynamic personality and good in marketing field." },
+            { name: "Mrs. Annapurna", title: "Member Secretary", bio: "Annapurna is a good and experience member with good communication skill for the people." },
+            { name: "Mrs. Rashmi C.", title: "Trustee", bio: "Rashmi is a very famous personality with good knowledge and development ideas." },
+            { name: "Marekka V", title: "General Secretary", bio: "Marekka is famous among the members as she has a very attractive personality to communicate with the people." },
+            { name: "Mrs. Bhagya", title: "Board Member", bio: "Bhagya as a board member working hard to develop the activies." }
+        ];
+
+        // 2. Inject members into the grid
+        const grid = document.getElementById('memberGrid');
+        
+        members.forEach((member, index) => {
+            const card = document.createElement('div');
+            card.className = 'member-card';
+            card.innerHTML = `
+                <h3>${member.name}</h3>
+                <p>${member.title}</p>
+            `;
+            card.onclick = () => showMemberDetails(index);
+            grid.appendChild(card);
+        });
+
+        // 3. Modal Logic
+        const modal = document.getElementById('memberModal');
+        const modalBody = document.getElementById('modalBody');
+        const span = document.querySelector('.close-modal');
+
+        function showMemberDetails(index) {
+            const m = members[index];
+            modalBody.innerHTML = `
+                <h2>${m.name}</h2>
+                <h4>${m.title}</h4>
+                <p>${m.bio}</p>
+            `;
+            modal.style.display = "block";
+        }
+
+        span.onclick = () => modal.style.display = "none";
+        window.onclick = (event) => {
+            if (event.target == modal) modal.style.display = "none";
+        }
+    </script>
+</body>
+</html>
